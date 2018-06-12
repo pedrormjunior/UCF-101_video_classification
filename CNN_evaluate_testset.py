@@ -3,6 +3,7 @@ Classify test images set through our CNN.
 Use keras 2+ and tensorflow 1+
 It takes a long time for hours.
 """
+import os
 import numpy as np
 import operator
 import random
@@ -22,11 +23,14 @@ def main(nb_images=5):
     test_generator = test_data_gen.flow_from_directory('./data/test/', target_size=(299, 299),
                                                        batch_size=batch_size, classes=data.classes,
                                                        class_mode='categorical')
-    # load the trained model that has been saved in CNN_train_UCF101.py, your model name maybe is not the same as follow
-    model = load_model('data/checkpoints/inception.057-1.16.hdf5')
+
+    # load the trained model that has been saved in CNN_train_UCF101.py
+    checkpoint = sorted(os.listdir('data/checkpoints/'))[-1] # get the last checkpoint
+    filename = os.path.join('data/checkpoints/', checkpoint)
+    model = load_model(filename)
+
     results = model.evaluate_generator(generator=test_generator, steps=test_data_num // batch_size)
     print(results)
-    print(model.metrics)
 
 
 if __name__ == '__main__':

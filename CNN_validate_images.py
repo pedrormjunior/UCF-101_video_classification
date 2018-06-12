@@ -1,6 +1,7 @@
 """
 Classify a few images through our CNN.
 """
+import os
 import numpy as np
 import operator
 import random
@@ -12,7 +13,11 @@ from keras.models import load_model
 def main(nb_images=5):
     """Spot-check `nb_images` images."""
     data = DataSet()
-    model = load_model('data/checkpoints/inception.057-1.16.hdf5') #replaced by your model name
+
+    # load the trained model that has been saved in CNN_train_UCF101.py
+    checkpoint = sorted(os.listdir('data/checkpoints/'))[-1] # get the last checkpoint
+    filename = os.path.join('data/checkpoints/', checkpoint)
+    model = load_model(filename)
 
     # Get all our test images.
     images = glob.glob('./data/test/**/*.jpg')
