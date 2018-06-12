@@ -1,0 +1,4 @@
+*.pyc
+network_trained*
+testset_evaluated*
+validation_images_evaluated*

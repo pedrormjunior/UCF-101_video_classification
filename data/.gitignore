@@ -1,0 +1,10 @@
+train/
+test/
+checkpoints/
+
+UCF101.rar
+files_extracted
+files_moved
+
+logs/
+data_file.csv
