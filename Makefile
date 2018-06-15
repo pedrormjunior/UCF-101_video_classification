@@ -8,6 +8,9 @@ export CUDA_VISIBLE_DEVICES := -1 #no GPU
 all: \
 	validation_images_evaluated \
 
+UCF101.dat: network_trained
+	CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} $(NICE) $(PYTHON) CNN_extract_features_testset.py
+
 validation_images_evaluated: testset_evaluated
 	set -o pipefail; \
 	CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} $(NICE) $(PYTHON) CNN_validate_images.py 2>&1 | tee $@_fail && mv $@_fail $@
