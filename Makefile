@@ -8,6 +8,9 @@ export CUDA_VISIBLE_DEVICES := -1 #no GPU
 all: \
 	validation_images_evaluated \
 
+UCF101_limited.dat: UCF101.dat
+	$(NICE) $(PYTHON) UCF101_limited.py
+
 UCF101.dat: network_trained
 	CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} $(NICE) $(PYTHON) CNN_extract_features_testset.py
 

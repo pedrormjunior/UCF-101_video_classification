@@ -2,4 +2,4 @@
 network_trained*
 testset_evaluated*
 validation_images_evaluated*
-UCF101.dat
+*.dat
